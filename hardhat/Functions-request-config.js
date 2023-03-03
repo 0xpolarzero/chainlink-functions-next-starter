@@ -1,5 +1,5 @@
 const fs = require("fs")
-const { REQUEST_ARGS } = require("./helper-hardhat-config")
+const { REQUEST_ARGS, sourceLocation } = require("./helper-hardhat-config")
 
 // Loads environment variables from .env file (if it exists)
 require("dotenv").config()
@@ -32,7 +32,7 @@ const requestConfig = {
   // code language (only JavaScript is currently supported)
   codeLanguage: CodeLanguage.JavaScript,
   // string containing the source code to be executed
-  source: fs.readFileSync("./request-example.js").toString(),
+  source: fs.readFileSync(sourceLocation).toString(),
   //source: fs.readFileSync('./API-request-example.js').toString(),
   // secrets can be accessed within the source code with `secrets.varName` (ie: secrets.apiKey). The secrets object can only contain string values.
   secrets: { apiKey: process.env.COINMARKETCAP_API_KEY ?? "" },

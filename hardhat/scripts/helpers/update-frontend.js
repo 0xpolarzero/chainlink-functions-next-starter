@@ -1,10 +1,11 @@
 const { ethers, network } = require("hardhat")
 const fs = require("fs")
+const { sourceLocation } = require("../../helper-hardhat-config")
 
 const frontendConstantsFolder = "../frontend/app/api/request/constants/"
 const frontendConfigFile = `${frontendConstantsFolder}networkMapping.json`
 const frontendAbiFolder = `${frontendConstantsFolder}abi/`
-const sourceFile = "./request-example.js"
+const sourceFile = sourceLocation
 const localConfigFile = "./sub-config.json"
 
 module.exports = async function (contractAddress, subId) {

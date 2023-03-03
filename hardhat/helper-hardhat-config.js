@@ -1,6 +1,7 @@
 const subConfig = require("./sub-config.json")
 
 const developmentChains = ["hardhat", "localhost"]
+const sourceLocation = "./request-example.js"
 
 // Subscription
 const FUNDING_AMOUNT = "1" // 1.0 LINK
@@ -17,4 +18,5 @@ module.exports = {
   GAS_LIMIT,
   REQUEST_ARGS,
   SIMULATE,
+  sourceLocation,
 }

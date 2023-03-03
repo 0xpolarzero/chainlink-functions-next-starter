@@ -1,6 +1,8 @@
 // This example shows how to calculate a continuously compounding interested rate.
 // This calculation would require significant on-chain gas, but is easy for a decentralized oracle network.
 
+// ! Do not use backticks (`) in the source code. Use single quotes (') instead.
+
 // Arguments can be provided when a request is initated on-chain and used in the request source code as shown below
 const principalAmount = parseInt(args[0])
 const APYTimes100 = parseInt(args[1])
