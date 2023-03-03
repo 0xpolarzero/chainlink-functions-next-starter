@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "eth-crypto": "^2.5.0",
+    "ethers": "5.7.2",
+    "is-http-url": "^2.0.0",
     "next": "13.2.3",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-toastify": "^9.1.1"
   },
   "prettier": {
     "trailingComma": "es5",

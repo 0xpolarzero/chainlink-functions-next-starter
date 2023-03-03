@@ -47,7 +47,7 @@ const updateAbi = async (contractAddress) => {
 
 const updateSource = async () => {
   const source = fs.readFileSync(sourceFile, "utf8")
-  fs.writeFileSync(`${frontendConstantsFolder}source.js`, "export default source = `" + source + "`")
+  fs.writeFileSync(`${frontendConstantsFolder}source.js`, "export default `" + source + "`")
 }
 
 const updateLocalConfig = async (contractAddress, subId) => {
