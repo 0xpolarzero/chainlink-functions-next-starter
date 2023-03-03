@@ -2,7 +2,7 @@ const { ethers, network } = require("hardhat")
 const { getDecodedResultLog, getRequestConfig } = require("../../FunctionsSandboxLibrary")
 const { generateRequest } = require("../../tasks/Functions-client/buildRequestJSON")
 const { VERIFICATION_BLOCK_CONFIRMATIONS, networkConfig } = require("../../network-config")
-const { subConfig, GAS_LIMIT, SIMULATE } = require("../../helper-hardhat-config")
+const { retrieveRequestConfig, getParams } = require("../../helper-hardhat-config")
 
 const readline = require("readline-promise").default
 
@@ -14,11 +14,11 @@ const request = async () => {
   }
 
   const taskArgs = {
-    contract: subConfig[network.name]["contractAddress"],
-    subid: subConfig[network.name]["subId"],
-    simulate: SIMULATE,
-    gaslimit: GAS_LIMIT || 100_000,
-    requestgas: 1_500_000,
+    contract: getParams()["sub"][network.name]["contractAddress"],
+    subid: getParams()["sub"][network.name]["subId"],
+    simulate: getParams()["simulate"],
+    gaslimit: getParams()["gasLimit"] || 100_000,
+    requestgas: getParams()["requestGas"] || 1_500_000,
   }
   // A manual gas limit is required as the gas limit estimated by Ethers is not always accurate
   const overrides = {
@@ -43,8 +43,8 @@ const request = async () => {
     "contracts/dev/functions/FunctionsBillingRegistry.sol:FunctionsBillingRegistry"
   )
   const registry = await RegistryFactory.attach(registryAddress)
-
-  const unvalidatedRequestConfig = require("../../Functions-request-config.js")
+  const { args, source, secrets, expectedReturnType } = getParams()
+  const unvalidatedRequestConfig = retrieveRequestConfig(args, source, secrets, expectedReturnType)
   const requestConfig = getRequestConfig(unvalidatedRequestConfig)
 
   const request = await generateRequest(requestConfig, taskArgs)

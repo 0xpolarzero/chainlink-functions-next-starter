@@ -2,7 +2,7 @@ const { ethers, network } = require("hardhat")
 const fs = require("fs")
 const { sourceLocation } = require("../../helper-hardhat-config")
 
-const frontendConstantsFolder = "../frontend/app/api/request/constants/"
+const frontendConstantsFolder = "../frontend/app/systems/request/constants/"
 const frontendConfigFile = `${frontendConstantsFolder}networkMapping.json`
 const frontendAbiFolder = `${frontendConstantsFolder}abi/`
 const sourceFile = sourceLocation

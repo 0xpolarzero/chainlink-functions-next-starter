@@ -1,22 +1,54 @@
+const fs = require("fs")
+
+const requestConfig = require("./Functions-request-config.js")
+const sourceCode = fs.readFileSync("./request-example.js")
 const subConfig = require("./sub-config.json")
 
-const developmentChains = ["hardhat", "localhost"]
-const sourceLocation = "./request-example.js"
+const ReturnType = {
+  uint: "uint256",
+  uint256: "uint256",
+  int: "int256",
+  int256: "int256",
+  string: "string",
+  bytes: "Buffer",
+  Buffer: "Buffer",
+}
+
+/**
+ * @notice Update these
+ */
 
 // Subscription
 const FUNDING_AMOUNT = "1" // 1.0 LINK
 
 // Request
-const REQUEST_ARGS = ["1000000", "450"]
 const GAS_LIMIT = 100_000
 const SIMULATE = true
+const REQUEST_ARGS = ["1000000", "450"]
+const RETURN_TYPE = ReturnType.uint256
+const SECRETS = { apiKey: process.env.COINMARKETCAP_API_KEY ?? "" }
+
+/**
+ * @notice Don't change these
+ */
+
+const developmentChains = ["hardhat", "localhost"]
+
+const getParams = () => ({
+  sub: subConfig,
+  fundingAmount: FUNDING_AMOUNT,
+  gasLimit: GAS_LIMIT,
+  requestGas: 1_500_000,
+  simulate: SIMULATE,
+  // Will be passed to build the request config
+  args: REQUEST_ARGS,
+  source: sourceCode,
+  secrets: SECRETS,
+  returnType: RETURN_TYPE,
+})
 
 module.exports = {
-  subConfig,
+  retrieveRequestConfig: requestConfig,
+  getParams,
   developmentChains,
-  FUNDING_AMOUNT,
-  GAS_LIMIT,
-  REQUEST_ARGS,
-  SIMULATE,
-  sourceLocation,
 }

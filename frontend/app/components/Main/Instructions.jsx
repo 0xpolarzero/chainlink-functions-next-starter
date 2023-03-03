@@ -1,7 +1,7 @@
 const Instructions = () => {
   return (
     <div>
-      <p>A starter kit for using Chainlink Functions in a frontend environment, with Next.js API routes.</p>
+      <p>A starter kit for using Chainlink Functions in a frontend environment, using Next.js.</p>
       <p>
         All the code for this app (both frontend and contracts) is derived from{" "}
         <a
