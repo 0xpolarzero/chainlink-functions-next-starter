@@ -11,7 +11,9 @@ const Instructions = () => {
         >
           the Chainlink Functions repository
         </a>
-        , but has been modified to work with Next.js API routes.{" "}
+        , but has been modified to work with Next.js, in a non-hardhat environment.{" "}
+      </p>
+      <p>
         <span className="bold">
           Everything is subject to my own interpretation, and is not guaranteed to be fully functional nor best
           optimized.

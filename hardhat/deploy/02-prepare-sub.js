@@ -15,4 +15,4 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
   await updateFrontend(functionsConsumer.address, subId)
 }
 
-module.exports.tags = ["all", "prepare"]
+module.exports.tags = ["all", "prepare", "update"]
