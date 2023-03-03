@@ -5,7 +5,12 @@ import { toast } from "react-toastify"
 import executeRequest from "@/app/systems/request/request.js"
 
 const Request = () => {
-  const [latestRequest, setLatestRequest] = useState(null)
+  const [inputAmount, setInputAmount] = useState(45)
+  const [inputAPY, setInputAPY] = useState(10)
+  const [inputMonths, setInputMonths] = useState(1)
+  // const [latestRequest, setLatestRequest] = useState(null)
+  const [latestRequest, setLatestRequest] = useState({ result: 42, cost: 0.3203042323 })
+  const [isRequesting, setIsRequesting] = useState(false)
   const notification = useRef(null)
 
   const updateNotification = (message) => {
@@ -20,7 +25,13 @@ const Request = () => {
 
   const performRequest = async () => {
     notification.current = toast.loading("Initiating request...")
-    const res = await executeRequest(["45", "10000"], "mumbai", updateNotification)
+    setIsRequesting(true)
+
+    const res = await executeRequest(
+      [inputAmount.toString(), (inputAPY * 100).toString(), inputMonths.toString()],
+      "mumbai",
+      updateNotification
+    )
 
     if (res.error) {
       console.log("ERROR: ", res.result)
@@ -43,21 +54,63 @@ const Request = () => {
       setLatestRequest(res)
       console.log(res)
     }
+
     notification.current = null
+    setIsRequesting(false)
   }
 
   return (
-    <div>
-      <button onClick={performRequest}>Perform Request</button>
-      <h3>Latest Request</h3>
-      {latestRequest ? (
-        <>
-          <p>Result: {latestRequest.result.toString()}</p>
-          <p>Cost: {latestRequest.cost}</p>
-        </>
-      ) : (
-        <p>No request has been made yet.</p>
-      )}
+    <div className="request">
+      <div className="inputs">
+        <div className="input">
+          <label htmlFor="amount">Amount</label>
+          <input
+            type="number"
+            id="amount"
+            value={inputAmount}
+            min={0}
+            onChange={(e) => setInputAmount(e.target.value)}
+          />
+        </div>
+
+        <div className="input">
+          <label htmlFor="apy">APY</label>
+          <input type="number" id="apy" value={inputAPY} min={0} onChange={(e) => setInputAPY(e.target.value)} />
+        </div>
+
+        <div className="input">
+          <label htmlFor="months">Months</label>
+          <input
+            type="number"
+            id="months"
+            value={inputMonths}
+            min={0}
+            onChange={(e) => setInputMonths(e.target.value)}
+          />
+        </div>
+      </div>
+
+      <button onClick={performRequest} disabled={isRequesting}>
+        Perform Request
+      </button>
+
+      <div className="feedback">
+        <h3>Latest Request</h3>
+        {latestRequest ? (
+          <>
+            <div>
+              Amount after interest
+              <span className="emphasize">{latestRequest.result.toString()}</span>
+            </div>
+            <div>
+              Request total cost
+              <span className="emphasize">{latestRequest.cost} LINK</span>
+            </div>
+          </>
+        ) : (
+          <p>No request has been made yet.</p>
+        )}
+      </div>
     </div>
   )
 }

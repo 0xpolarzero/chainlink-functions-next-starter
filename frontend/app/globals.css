@@ -84,10 +84,23 @@ button {
   cursor: pointer;
   transition: all 0.25s ease;
 }
-button:hover {
+input {
+  background-color: var(--background-button);
+  font-family: var(--font-mono);
+  font-size: 1em;
+  font-weight: 500;
+  border: 1px solid transparent;
+  padding: 0.4em 1.2em;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+button:hover,
+input:hover {
   border-color: var(--accent-color);
 }
-button:active {
+button:active,
+input:hover {
   border-color: var(--accent-color-hover);
 }
 button:disabled {
@@ -171,6 +184,33 @@ header .links {
 main {
   width: 100%;
 }
+
+main .request {
+  display: grid;
+  gap: 1em;
+}
+
+main .request .inputs {
+  display: grid;
+  gap: 1em;
+}
+
+main .request .inputs .input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+}
+
+main .request .feedback {
+  display: grid;
+  gap: 1em;
+}
+main .request .feedback div {
+  display: grid;
+  gap: 0.5em;
+}
+
 /* Footer */
 footer {
   font-size: 0.8em;
@@ -182,11 +222,37 @@ footer {
     padding: 1em 2em;
   }
 
+  main .request .feedback {
+    grid-template-columns: auto 1fr;
+    gap: 2em;
+  }
+  main .request .feedback h3 {
+    grid-column: span 2;
+  }
+  main .request .feedback div:last-child {
+    border-left: 1px solid var(--button-border);
+    padding-left: 2em;
+  }
+
   header {
     grid-template-columns: 1fr auto;
   }
   header .title {
     font-size: 1.2em;
+  }
+}
+@media (min-width: 1000px) {
+  main .request .inputs {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  main .request .inputs .input {
+    justify-content: center;
+  }
+  main .request .inputs .input:first-child {
+    justify-content: flex-start;
+  }
+  main .request .inputs .input:last-child {
+    justify-content: flex-end;
   }
 }
 

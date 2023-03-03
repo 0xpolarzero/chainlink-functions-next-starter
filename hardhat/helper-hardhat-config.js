@@ -24,7 +24,7 @@ const FUNDING_AMOUNT = "1" // 1.0 LINK
 // Request
 const GAS_LIMIT = 100_000
 const SIMULATE = true
-const REQUEST_ARGS = ["45", "10000"]
+const REQUEST_ARGS = ["45", "10000", "1"]
 const RETURN_TYPE = ReturnType.uint256
 const SECRETS = { apiKey: process.env.COINMARKETCAP_API_KEY ?? "" }
 
