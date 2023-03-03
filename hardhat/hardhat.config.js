@@ -1,5 +1,6 @@
 require("@nomicfoundation/hardhat-toolbox")
 require("hardhat-contract-sizer")
+require("hardhat-deploy")
 require("@openzeppelin/hardhat-upgrades")
 require("./tasks")
 require("dotenv").config()
@@ -114,6 +115,11 @@ module.exports = {
       url: SEPOLIA_RPC_URL || "UNSET",
       accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
       chainId: 11155111,
+    },
+  },
+  namedAccounts: {
+    deployer: {
+      default: 0,
     },
   },
   etherscan: {
