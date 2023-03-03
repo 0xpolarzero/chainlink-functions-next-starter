@@ -1,6 +1,6 @@
 const { FUNDING_AMOUNT } = require("../helper-hardhat-config")
 const create = require("../scripts/custom/create")
-const updateFrontend = require("../scripts/custom/update-frontend")
+const updateFrontend = require("../scripts/helpers/update-frontend")
 
 module.exports = async function ({ getNamedAccounts, deployments }) {
   const functionsConsumer = await deployments.get("FunctionsConsumer")
